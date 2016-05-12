@@ -9,11 +9,10 @@ int binary_search(const int* a, int l, int h, int k, int* counter)
 {
     if (counter != NULL) (*counter)++;
 
-    // Terminate if indexes cross over, no key found
+    // Terminate if indices cross over, no key found
     if (l > h) return -1;
 
     int m = (l + h) / 2;
-
     if (a[m] == k) return m;
 
     if (a[m] < k) return binary_search(a, m + 1, h, k, counter);
