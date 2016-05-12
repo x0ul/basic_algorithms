@@ -1,3 +1,6 @@
+// April 2016
+// Insertion sort algorithm and a simple test harness
+
 #include <stdio.h>
 #include <stdint.h>
 
@@ -35,6 +38,7 @@ static void swap(int a[], size_t i, size_t j)
     a[j] = temp;
 }
 
+// Test harness
 int main(int argc, char* argv[])
 {
     int test_array[] = {1, 0, -10, -20, 100};
