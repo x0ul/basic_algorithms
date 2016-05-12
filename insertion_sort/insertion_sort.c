@@ -3,13 +3,19 @@
 
 #include <stdio.h>
 #include <stdint.h>
+#include <stdlib.h>
+#include <assert.h>
 
+// Public, if I were to write a header...
 void insertion_sort(int a[], size_t count);
+
+// Private helpers
 static void print_array(int a[], size_t count);
 static void swap(int a[], size_t i, size_t j);
 
 void insertion_sort(int a[], size_t count)
 {
+    // Start at 1 because we swap with i-1
     for (size_t i = 1; i < count; i++)
     {
         size_t j = i;
@@ -38,16 +44,27 @@ static void swap(int a[], size_t i, size_t j)
     a[j] = temp;
 }
 
-// Test harness
+// Test harness sorts numbers given as command line arguments
 int main(int argc, char* argv[])
 {
-    int test_array[] = {1, 0, -10, -20, 100};
+    size_t input_count = argc - 1;
+    char** input_array = &argv[1];
 
-    printf("Unsorted:\n");
-    print_array(test_array, sizeof(test_array)/sizeof(*test_array));
+    printf("input_count: %zu\n", input_count);
 
-    printf("Sorted:\n");
-    insertion_sort(test_array, sizeof(test_array)/sizeof(*test_array));
-    print_array(test_array, sizeof(test_array)/sizeof(*test_array));
+    int* input = malloc(input_count * sizeof(int));
+
+    assert(input != NULL);
+
+    for (size_t i = 0; i < input_count; i++)
+    {
+        input[i] = atoi(input_array[i]);
+    }
+
+    insertion_sort(input, input_count);
+    print_array(input, input_count);
+
+    free(input);
+
     return 0;
 }
